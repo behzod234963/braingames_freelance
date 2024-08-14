@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -43,7 +42,6 @@ android {
 dependencies {
 
     implementation(libs.androidx.navigation.fragment)
-    val room_version = "2.5.2"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -52,9 +50,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(libs.room)
-    kapt("androidx.room:room-compiler:$room_version")
 
     implementation(libs.navigation.ui.ktx)
     implementation(libs.navigation)

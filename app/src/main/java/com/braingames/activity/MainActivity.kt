@@ -1,4 +1,4 @@
-package com.braingames
+package com.braingames.activity
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
+import com.braingames.R
 import com.braingames.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

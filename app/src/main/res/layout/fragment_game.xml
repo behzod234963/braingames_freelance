@@ -1,14 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.GameFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    tools:context=".fragments.GameFragment"
+    android:background="@drawable/game_bg_root">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_questll"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/pic_background"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center|bottom"
+        android:orientation="vertical"
+        android:background="@drawable/bg_questfield">
+        <TextView
+            android:id="@+id/tv_question_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question 1/10"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:text="Data ta'lim stansiyasi qachon tashkil etilgan"
+            android:textSize="20sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/rg_answers"
+        android:layout_gravity="center"
+        android:layout_marginTop="110dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:padding="10dp"
+        android:layout_marginHorizontal="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btnAnswer1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:backgroundTint="@null"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/bg_button_start"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btnAnswer2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:backgroundTint="@null"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/bg_button_start"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btnAnswer3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:backgroundTint="@null"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/bg_button_start"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btnAnswer4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:backgroundTint="@null"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/bg_button_start"
+                android:textSize="18sp"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>
