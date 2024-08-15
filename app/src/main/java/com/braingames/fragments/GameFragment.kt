@@ -199,62 +199,118 @@ class GameFragment : Fragment() {
         if (playerLevel == 1) {
             binding.apply {
                 btnAnswer1.setOnClickListener {
-                    questionCount++
                     selected = 1
-                    Toast.makeText(requireContext(), "$questionCount", Toast.LENGTH_SHORT).show()
-                    Toast.makeText(requireContext(), "$selected", Toast.LENGTH_SHORT).show()
+                    questionCount++
+                    firstLevelAnswers.add(questionCount)
+                    setQuestions(questionCount)
+                    if (questionCount == firstLevelQuestions.size) {
+                        findNavController().navigate(
+                            R.id.action_gameFragment_to_resultFragment,
+                            bundleOf("results" to firstLevelAnswers.toIntArray())
+                        )
+                    }else{
+                        setQuestions(questionCount)
+                    }
                 }
                 btnAnswer2.setOnClickListener {
-                    questionCount++
                     selected = 2
+                    questionCount++
+                    firstLevelAnswers.add(questionCount)
+                    setQuestions(questionCount)
+                    if (questionCount == firstLevelQuestions.size) {
+                        findNavController().navigate(
+                            R.id.action_gameFragment_to_resultFragment,
+                            bundleOf("results" to firstLevelAnswers.toIntArray())
+                        )
+                    }else{
+                        setQuestions(questionCount)
+                    }
                 }
                 btnAnswer3.setOnClickListener {
-                    questionCount++
                     selected = 3
+                    questionCount++
+                    firstLevelAnswers.add(questionCount)
+                    setQuestions(questionCount)
+                    if (questionCount == firstLevelQuestions.size) {
+                        findNavController().navigate(
+                            R.id.action_gameFragment_to_resultFragment,
+                            bundleOf("results" to firstLevelAnswers.toIntArray())
+                        )
+                    }else{
+                        setQuestions(questionCount)
+                    }
                 }
                 btnAnswer4.setOnClickListener {
-                    questionCount++
                     selected = 4
-                }
-            }
-            if (selected > 0) {
-                Toast.makeText(requireContext(), "$questionCount", Toast.LENGTH_SHORT).show()
-                Toast.makeText(requireContext(), "$selected", Toast.LENGTH_SHORT).show()
-                firstLevelAnswers.add(questionCount)
-                setQuestions(questionCount)
-                if (questionCount == firstLevelQuestions.size) {
-                    findNavController().navigate(
-                        R.id.action_gameFragment_to_resultFragment,
-                        bundleOf("results" to firstLevelAnswers)
-                    )
-                } else if (questionCount == secondLevelQuestions.size) {
-
-                } else {
+                    questionCount++
+                    firstLevelAnswers.add(questionCount)
                     setQuestions(questionCount)
+                    if (questionCount == firstLevelQuestions.size) {
+                        findNavController().navigate(
+                            R.id.action_gameFragment_to_resultFragment,
+                            bundleOf("results" to firstLevelAnswers.toIntArray())
+                        )
+                    }else{
+                        setQuestions(questionCount)
+                    }
                 }
             }
         } else {
             binding.apply {
                 btnAnswer1.setOnClickListener {
                     selected = 1
-                }
-                btnAnswer2.setOnClickListener {
-                    selected = 2
-                }
-                btnAnswer3.setOnClickListener {
-                    selected = 3
-                }
-                btnAnswer4.setOnClickListener {
-                    selected = 4
-                }
-                if (selected > 0) {
                     questionCount++
-                    secondLevelAnswers.add(selected)
+                    secondLevelAnswers.add(questionCount)
+                    setQuestions(questionCount)
                     if (questionCount == secondLevelQuestions.size) {
                         findNavController().navigate(
                             R.id.action_gameFragment_to_resultFragment,
-                            bundleOf("results" to secondLevelAnswers)
+                            bundleOf("results" to secondLevelAnswers.toIntArray())
                         )
+                    }else{
+                        setQuestions(questionCount)
+                    }
+                }
+                btnAnswer2.setOnClickListener {
+                    selected = 2
+                    questionCount++
+                    secondLevelAnswers.add(questionCount)
+                    setQuestions(questionCount)
+                    if (questionCount == secondLevelQuestions.size) {
+                        findNavController().navigate(
+                            R.id.action_gameFragment_to_resultFragment,
+                            bundleOf("results" to secondLevelAnswers.toIntArray())
+                        )
+                    }else{
+                        setQuestions(questionCount)
+                    }
+                }
+                btnAnswer3.setOnClickListener {
+                    selected = 3
+                    questionCount++
+                    secondLevelAnswers.add(questionCount)
+                    setQuestions(questionCount)
+                    if (questionCount == secondLevelQuestions.size) {
+                        findNavController().navigate(
+                            R.id.action_gameFragment_to_resultFragment,
+                            bundleOf("results" to secondLevelAnswers.toIntArray())
+                        )
+                    }else{
+                        setQuestions(questionCount)
+                    }
+                }
+                btnAnswer4.setOnClickListener {
+                    selected = 4
+                    questionCount++
+                    secondLevelAnswers.add(questionCount)
+                    setQuestions(questionCount)
+                    if (questionCount == secondLevelQuestions.size) {
+                        findNavController().navigate(
+                            R.id.action_gameFragment_to_resultFragment,
+                            bundleOf("results" to secondLevelAnswers.toIntArray())
+                        )
+                    }else{
+                        setQuestions(questionCount)
                     }
                 }
             }
