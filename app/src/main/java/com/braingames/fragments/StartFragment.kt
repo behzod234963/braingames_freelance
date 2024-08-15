@@ -1,5 +1,6 @@
 package com.braingames.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +14,6 @@ import com.braingames.databinding.FragmentStartBinding
 
 class StartFragment : Fragment() {
     private lateinit var binding:FragmentStartBinding
-    private lateinit var navController:NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,10 +30,16 @@ class StartFragment : Fragment() {
     }
 
     private fun initView() {
+        val sharedPrefs = context?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val levelStatus = sharedPrefs?.getBoolean("levelStatus",false)
         binding.apply {
             btnStart.setOnClickListener {
                 findNavController().navigate(R.id.action_startFragment_to_gameFragment)
-                navController.popBackStack()
+                if (levelStatus == true){
+                    sharedPrefs.edit().putInt("PlayerLevel",2).apply()
+                }else{
+                    sharedPrefs?.edit()?.putInt("PlayerLevel",1)?.apply()
+                }
             }
         }
     }

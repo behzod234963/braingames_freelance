@@ -1,11 +1,16 @@
 package com.braingames.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.braingames.R
 import com.braingames.databinding.FragmentGameBinding
 import com.braingames.questions.Questions
 
@@ -14,11 +19,12 @@ class GameFragment : Fragment() {
     private lateinit var binding: FragmentGameBinding
     private lateinit var firstLevelQuestions: ArrayList<Questions>
     private lateinit var secondLevelQuestions: ArrayList<Questions>
-    private lateinit var answers: ArrayList<Int>
-    private var selected = 0
-    private var questionCount = 0
-    val sharedPrefs = context?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-
+    private lateinit var firstLevelAnswers: ArrayList<Int>
+    private lateinit var secondLevelAnswers: ArrayList<Int>
+    private val sharedPrefs = context?.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+    private val playerLevel = sharedPrefs?.getInt("PlayerLevel", 1) ?: 1
+    var selected = 0
+    var questionCount = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,96 +38,223 @@ class GameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        loadQuestions()
+        setQuestions(questionCount)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setQuestions(questionCount: Int) {
         selected = 0
-        val playerLevel = sharedPrefs?.getInt("PlayerLevel",1)
         binding.apply {
-            when(playerLevel){
-                1->{
-                    tvQuestionNumber.text = "Question ${questionCount + 1}/${firstLevelQuestions.size}"
-                    tvQuestion.text = firstLevelQuestions[questionCount].question
+            if (playerLevel == 1) {
+                tvQuestion.text = firstLevelQuestions[questionCount].question
+                ivQuestionBackground.setImageResource(firstLevelQuestions[questionCount].image)
 
-                    btnAnswer1.text = firstLevelQuestions[questionCount].firstVariant
-                    btnAnswer2.text = firstLevelQuestions[questionCount].secondVariant
-                    btnAnswer3.text = firstLevelQuestions[questionCount].thirdVariant
-                    btnAnswer4.text = firstLevelQuestions[questionCount].fourthVariant
-                }
-                2->{
-                    tvQuestionNumber.text = "Question ${questionCount + 1}/${secondLevelQuestions.size}"
-                    tvQuestion.text = secondLevelQuestions[questionCount].question
+                btnAnswer1.text = firstLevelQuestions[questionCount].firstVariant
+                btnAnswer2.text = firstLevelQuestions[questionCount].secondVariant
+                btnAnswer3.text = firstLevelQuestions[questionCount].thirdVariant
+                btnAnswer4.text = firstLevelQuestions[questionCount].fourthVariant
+            } else {
+                tvQuestion.text = secondLevelQuestions[questionCount].question
+                ivQuestionBackground.setImageResource(firstLevelQuestions[questionCount].image)
 
-                    btnAnswer1.text = secondLevelQuestions[questionCount].firstVariant
-                    btnAnswer2.text = secondLevelQuestions[questionCount].secondVariant
-                    btnAnswer3.text = secondLevelQuestions[questionCount].thirdVariant
-                    btnAnswer4.text = secondLevelQuestions[questionCount].fourthVariant
-                }
+                btnAnswer1.text = secondLevelQuestions[questionCount].firstVariant
+                btnAnswer2.text = secondLevelQuestions[questionCount].secondVariant
+                btnAnswer3.text = secondLevelQuestions[questionCount].thirdVariant
+                btnAnswer4.text = secondLevelQuestions[questionCount].fourthVariant
             }
         }
     }
 
     private fun loadQuestions() {
-        val playerLevel = sharedPrefs?.getInt("PlayerLevel", 1)
         when (playerLevel) {
-            1->{
+            1 -> {
                 firstLevelQuestions = ArrayList()
+                firstLevelQuestions.add(
+                    Questions(
+                        image = R.drawable.first_level_question_image1,
+                        question = "Треугольник это-",
+                        firstVariant = "Четырёхугольная призма",
+                        secondVariant = "Геометрическая фигура образованная тремя отрезками которые соединяют три точки, не лежащие на одной прямой",
+                        thirdVariant = "Фигура которого все грани которой являются параллелограммами",
+                        fourthVariant = "Треугольник, образуемый точками пересечения линий",
+                        answer = 2
+                    )
+                )
+                firstLevelQuestions.add(
+                    Questions(
+                        image = R.drawable.first_level_question_image2,
+                        question = "На каком варианте указано квадрат?",
+                        firstVariant = "Фигура которого число строк совпадает с числом столбцов",
+                        secondVariant = "Четырёхугольник, у которого все углы прямые ",
+                        thirdVariant = "Четырёхугольник, у которого противолежащие стороны попарно параллельны, то есть лежат на параллельных прямых",
+                        fourthVariant = "Плоский четырёхугольник, у которого все углы и все стороны равны",
+                        answer = 4
+                    )
+                )
+                firstLevelQuestions.add(
+                    Questions(
+                        image = R.drawable.first_level_question_image3,
+                        question = "На каком варианте указано правильное описание куба?",
+                        firstVariant = "Геометрическая фигура образованная тремя отрезками которые соединяют три точки, не лежащие на одной прямой",
+                        secondVariant = "Многогранник, поверхность которого состоит из шести квадратов",
+                        thirdVariant = "Четырёхугольник, которого число строк совпадает с числом столбцов",
+                        fourthVariant = "Четырёхугольник, у которого все углы прямые",
+                        answer = 2
+                    )
+                )
+                firstLevelQuestions.add(
+                    Questions(
+                        image = R.drawable.first_level_question_image4,
+                        question = "Кому в голову упало яблоко?",
+                        firstVariant = "Исаак Нютон",
+                        secondVariant = "Аврам Линкольн",
+                        thirdVariant = "Галилео Галилей",
+                        fourthVariant = "Николай Коперник",
+                        answer = 1
+                    )
+                )
+                firstLevelQuestions.add(
+                    Questions(
+                        image = R.drawable.first_level_question_image5,
+                        question = "Кто сказал слово \"Эврика\"? ",
+                        firstVariant = "Плутон",
+                        secondVariant = "Аристотель",
+                        thirdVariant = "Авиценна",
+                        fourthVariant = "Архимед",
+                        answer = 4
+                    )
+                )
+                firstLevelQuestions.add(
+                    Questions(
+                        image = R.drawable.first_level_question_image6,
+                        question = "Кто изобрёл лампу накаливания?",
+                        firstVariant = "Томас Эдисон",
+                        secondVariant = "Никола Тесла",
+                        thirdVariant = "Альберт Эйнштейн",
+                        fourthVariant = "Вильгельм Рентген",
+                        answer = 1
+                    )
+                )
+                firstLevelQuestions.add(
+                    Questions(
+                        image = R.drawable.first_level_question_image7,
+                        question = "Столица Италии это-",
+                        firstVariant = "Париж",
+                        secondVariant = "Мадрид",
+                        thirdVariant = "Рим",
+                        fourthVariant = "Милан",
+                        answer = 3
+                    )
+                )
+                firstLevelQuestions.add(
+                    Questions(
+                        image = R.drawable.first_level_question_image8,
+                        question = "Спутник земли это-",
+                        firstVariant = "Луна",
+                        secondVariant = "Сольнце",
+                        thirdVariant = "Марс",
+                        fourthVariant = "Сатурн",
+                        answer = 1
+                    )
+                )
+                firstLevelQuestions.add(
+                    Questions(
+                        image = R.drawable.first_level_question_image9,
+                        question = "Самая большая планета в солнечной системе?",
+                        firstVariant = "Нептун",
+                        secondVariant = "Юпитер",
+                        thirdVariant = "Земля",
+                        fourthVariant = "Венера",
+                        answer = 2
+                    )
+                )
+                firstLevelQuestions.add(
+                    Questions(
+                        image = R.drawable.first_level_question_image10,
+                        question = "Самая длинная река на земле?",
+                        firstVariant = "Амазонка",
+                        secondVariant = "Ниль",
+                        thirdVariant = "Ниагара",
+                        fourthVariant = "Миссисипи",
+                        answer = 1
+                    )
+                )
             }
-            2->{
+
+            2 -> {
                 secondLevelQuestions = ArrayList()
             }
         }
     }
 
     private fun initViews() {
-        answers = ArrayList()
+        selected = 0
+        questionCount = 0
+        firstLevelAnswers = ArrayList()
+        secondLevelAnswers = ArrayList()
         secondLevelQuestions = ArrayList()
-        val playerLevel = sharedPrefs?.getInt("PlayerLevel",1)
-        when(playerLevel){
-            1->{
-                binding.apply {
-                    btnAnswer1.setOnClickListener {
-                        selected = 1
-                    }
-                    btnAnswer2.setOnClickListener {
-                        selected = 2
-                    }
-                    btnAnswer3.setOnClickListener {
-                        selected = 3
-                    }
-                    btnAnswer4.setOnClickListener {
-                        selected = 4
-                    }
-                    if (selected > 0) {
-                        answers.add(selected)
-                        questionCount++
-                        if (questionCount == firstLevelQuestions.size) {
+        loadQuestions()
+        setQuestions(questionCount)
 
-                        }
-                    }
+        if (playerLevel == 1) {
+            binding.apply {
+                btnAnswer1.setOnClickListener {
+                    questionCount++
+                    selected = 1
+                    Toast.makeText(requireContext(), "$questionCount", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "$selected", Toast.LENGTH_SHORT).show()
+                }
+                btnAnswer2.setOnClickListener {
+                    questionCount++
+                    selected = 2
+                }
+                btnAnswer3.setOnClickListener {
+                    questionCount++
+                    selected = 3
+                }
+                btnAnswer4.setOnClickListener {
+                    questionCount++
+                    selected = 4
                 }
             }
-            2->{
-                binding.apply {
-                    btnAnswer1.setOnClickListener {
-                        selected = 1
-                    }
-                    btnAnswer2.setOnClickListener {
-                        selected = 2
-                    }
-                    btnAnswer3.setOnClickListener {
-                        selected = 3
-                    }
-                    btnAnswer4.setOnClickListener {
-                        selected = 4
-                    }
-                    if (selected > 0) {
-                        answers.add(selected)
-                        questionCount++
-                        if (questionCount == secondLevelQuestions.size) {
+            if (selected > 0) {
+                Toast.makeText(requireContext(), "$questionCount", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "$selected", Toast.LENGTH_SHORT).show()
+                firstLevelAnswers.add(questionCount)
+                setQuestions(questionCount)
+                if (questionCount == firstLevelQuestions.size) {
+                    findNavController().navigate(
+                        R.id.action_gameFragment_to_resultFragment,
+                        bundleOf("results" to firstLevelAnswers)
+                    )
+                } else if (questionCount == secondLevelQuestions.size) {
 
-                        }
+                } else {
+                    setQuestions(questionCount)
+                }
+            }
+        } else {
+            binding.apply {
+                btnAnswer1.setOnClickListener {
+                    selected = 1
+                }
+                btnAnswer2.setOnClickListener {
+                    selected = 2
+                }
+                btnAnswer3.setOnClickListener {
+                    selected = 3
+                }
+                btnAnswer4.setOnClickListener {
+                    selected = 4
+                }
+                if (selected > 0) {
+                    questionCount++
+                    secondLevelAnswers.add(selected)
+                    if (questionCount == secondLevelQuestions.size) {
+                        findNavController().navigate(
+                            R.id.action_gameFragment_to_resultFragment,
+                            bundleOf("results" to secondLevelAnswers)
+                        )
                     }
                 }
             }
