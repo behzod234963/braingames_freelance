@@ -13,6 +13,10 @@
         android:theme="@style/Theme.BrainGames"
         tools:targetApi="31">
         <activity
+            android:name=".activity.ResultActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BrainGames" />
+        <activity
             android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>

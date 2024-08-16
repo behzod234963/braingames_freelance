@@ -1,7 +1,6 @@
 package com.braingames.questions
 
 data class Questions(
-    val image:Int,
     val question:String,
     val firstVariant:String,
     val secondVariant:String,
