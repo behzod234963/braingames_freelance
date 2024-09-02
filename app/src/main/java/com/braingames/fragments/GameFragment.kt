@@ -1,7 +1,6 @@
 package com.braingames.fragments
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,6 +25,10 @@ class GameFragment : Fragment() {
     private lateinit var secondLevelPhysicsQuestions: ArrayList<Questions>
     private lateinit var firstLevelAnswers: ArrayList<Int>
     private lateinit var secondLevelAnswers: ArrayList<Int>
+    private var isBtn1 = false
+    private var isBtn2 = false
+    private var isBtn3 = false
+    private var isBtn4 = false
 
     private val menuArgs: GameFragmentArgs by navArgs()
     override fun onCreateView(
@@ -47,79 +50,85 @@ class GameFragment : Fragment() {
     private fun setQuestions(questionCount: Int) {
         val status = SharedPreferences(requireContext()).getStatus()
 
-        if (status){
+        if (status) {
             SharedPreferences(requireContext()).saveLevel(2)
-        }else{
+        } else {
             SharedPreferences(requireContext()).saveLevel(1)
         }
         val playerLevel = SharedPreferences(requireContext()).getLevel()
         var selected = 0
         binding.apply {
-            if (playerLevel == 1) {
-                when (menuArgs.menu) {
-                    1 -> {
-                        tvQuestion.text = firstLevelGeometryQuestions[questionCount].question
-                        ivQuestionBackground.setImageResource(R.drawable.ic_geometry)
+            try {
+                if (playerLevel == 1) {
+                    when (menuArgs.menu) {
+                        1 -> {
+                            tvQuestion.text = firstLevelGeometryQuestions[questionCount].question
+                            ivQuestionBackground.setImageResource(R.drawable.ic_geometry)
 
-                        btnAnswer1.text = firstLevelGeometryQuestions[questionCount].firstVariant
-                        btnAnswer2.text = firstLevelGeometryQuestions[questionCount].secondVariant
-                        btnAnswer3.text = firstLevelGeometryQuestions[questionCount].thirdVariant
-                        btnAnswer4.text = firstLevelGeometryQuestions[questionCount].fourthVariant
+                            btnAnswer1.text = firstLevelGeometryQuestions[questionCount].firstVariant
+                            btnAnswer2.text = firstLevelGeometryQuestions[questionCount].secondVariant
+                            btnAnswer3.text = firstLevelGeometryQuestions[questionCount].thirdVariant
+                            btnAnswer4.text = firstLevelGeometryQuestions[questionCount].fourthVariant
+
+                        }
+
+                        2 -> {
+                            tvQuestion.text = firstLevelPhysicsQuestions[questionCount].question
+                            ivQuestionBackground.setImageResource(R.drawable.ic_physics)
+
+                            btnAnswer1.text = firstLevelPhysicsQuestions[questionCount].firstVariant
+                            btnAnswer2.text = firstLevelPhysicsQuestions[questionCount].secondVariant
+                            btnAnswer3.text = firstLevelPhysicsQuestions[questionCount].thirdVariant
+                            btnAnswer4.text = firstLevelPhysicsQuestions[questionCount].fourthVariant
+
+                        }
+
+                        3 -> {
+
+                            tvQuestion.text = firstLevelGeographyQuestions[questionCount].question
+                            ivQuestionBackground.setImageResource(R.drawable.ic_geography)
+
+                            btnAnswer1.text = firstLevelGeographyQuestions[questionCount].firstVariant
+                            btnAnswer2.text = firstLevelGeographyQuestions[questionCount].secondVariant
+                            btnAnswer3.text = firstLevelGeographyQuestions[questionCount].thirdVariant
+                            btnAnswer4.text = firstLevelGeographyQuestions[questionCount].fourthVariant
+
+                        }
                     }
+                } else {
+                    when (menuArgs.menu) {
+                        1 -> {
+                            tvQuestion.text = secondLevelGeometryQuestions[questionCount].question
+                            ivQuestionBackground.setImageResource(R.drawable.ic_geometry)
 
-                    2 -> {
-                        tvQuestion.text = firstLevelPhysicsQuestions[questionCount].question
-                        ivQuestionBackground.setImageResource(R.drawable.ic_physics)
+                            btnAnswer1.text = secondLevelGeometryQuestions[questionCount].firstVariant
+                            btnAnswer2.text = secondLevelGeometryQuestions[questionCount].secondVariant
+                            btnAnswer3.text = secondLevelGeometryQuestions[questionCount].thirdVariant
+                            btnAnswer4.text = secondLevelGeometryQuestions[questionCount].fourthVariant
+                        }
 
-                        btnAnswer1.text = firstLevelPhysicsQuestions[questionCount].firstVariant
-                        btnAnswer2.text = firstLevelPhysicsQuestions[questionCount].secondVariant
-                        btnAnswer3.text = firstLevelPhysicsQuestions[questionCount].thirdVariant
-                        btnAnswer4.text = firstLevelPhysicsQuestions[questionCount].fourthVariant
-                    }
+                        2 -> {
+                            tvQuestion.text = secondLevelPhysicsQuestions[questionCount].question
+                            ivQuestionBackground.setImageResource(R.drawable.ic_physics)
 
-                    3 -> {
-                        tvQuestion.text = firstLevelGeographyQuestions[questionCount].question
-                        ivQuestionBackground.setImageResource(R.drawable.ic_geography)
+                            btnAnswer1.text = secondLevelPhysicsQuestions[questionCount].firstVariant
+                            btnAnswer2.text = secondLevelPhysicsQuestions[questionCount].secondVariant
+                            btnAnswer3.text = secondLevelPhysicsQuestions[questionCount].thirdVariant
+                            btnAnswer4.text = secondLevelPhysicsQuestions[questionCount].fourthVariant
+                        }
 
-                        btnAnswer1.text = firstLevelGeographyQuestions[questionCount].firstVariant
-                        btnAnswer2.text = firstLevelGeographyQuestions[questionCount].secondVariant
-                        btnAnswer3.text = firstLevelGeographyQuestions[questionCount].thirdVariant
-                        btnAnswer4.text = firstLevelGeographyQuestions[questionCount].fourthVariant
+                        3 -> {
+                            tvQuestion.text = secondLevelGeographyQuestions[questionCount].question
+                            ivQuestionBackground.setImageResource(R.drawable.ic_geography)
+
+                            btnAnswer1.text = secondLevelGeographyQuestions[questionCount].firstVariant
+                            btnAnswer2.text = secondLevelGeographyQuestions[questionCount].secondVariant
+                            btnAnswer3.text = secondLevelGeographyQuestions[questionCount].thirdVariant
+                            btnAnswer4.text = secondLevelGeographyQuestions[questionCount].fourthVariant
+                        }
                     }
                 }
-            } else {
-                when (menuArgs.menu) {
-                    1 -> {
-                        tvQuestion.text = secondLevelGeometryQuestions[questionCount].question
-                        ivQuestionBackground.setImageResource(R.drawable.ic_geometry)
-
-                        btnAnswer1.text = secondLevelGeometryQuestions[questionCount].firstVariant
-                        btnAnswer2.text = secondLevelGeometryQuestions[questionCount].secondVariant
-                        btnAnswer3.text = secondLevelGeometryQuestions[questionCount].thirdVariant
-                        btnAnswer4.text = secondLevelGeometryQuestions[questionCount].fourthVariant
-                    }
-
-                    2 -> {
-                        tvQuestion.text = secondLevelPhysicsQuestions[questionCount].question
-                        ivQuestionBackground.setImageResource(R.drawable.ic_physics)
-
-                        btnAnswer1.text = secondLevelPhysicsQuestions[questionCount].firstVariant
-                        btnAnswer2.text = secondLevelPhysicsQuestions[questionCount].secondVariant
-                        btnAnswer3.text = secondLevelPhysicsQuestions[questionCount].thirdVariant
-                        btnAnswer4.text = secondLevelPhysicsQuestions[questionCount].fourthVariant
-                    }
-
-                    3 -> {
-                        tvQuestion.text = secondLevelGeographyQuestions[questionCount].question
-                        ivQuestionBackground.setImageResource(R.drawable.ic_geography)
-
-                        btnAnswer1.text = secondLevelGeographyQuestions[questionCount].firstVariant
-                        btnAnswer2.text = secondLevelGeographyQuestions[questionCount].secondVariant
-                        btnAnswer3.text = secondLevelGeographyQuestions[questionCount].thirdVariant
-                        btnAnswer4.text = secondLevelGeographyQuestions[questionCount].fourthVariant
-                    }
-                }
-            }
+            }catch (_:IndexOutOfBoundsException){ }
         }
     }
 
@@ -129,9 +138,9 @@ class GameFragment : Fragment() {
         firstLevelGeographyQuestions = ArrayList()
         val status = SharedPreferences(requireContext()).getStatus()
 
-        if (status){
+        if (status) {
             SharedPreferences(requireContext()).saveLevel(2)
-        }else{
+        } else {
             SharedPreferences(requireContext()).saveLevel(1)
         }
         val playerLevel = SharedPreferences(requireContext()).getLevel()
@@ -773,9 +782,9 @@ class GameFragment : Fragment() {
     private fun initViews() {
         val status = SharedPreferences(requireContext()).getStatus()
 
-        if (status){
+        if (status) {
             SharedPreferences(requireContext()).saveLevel(2)
-        }else{
+        } else {
             SharedPreferences(requireContext()).saveLevel(1)
         }
         val playerLevel = SharedPreferences(requireContext()).getLevel()
@@ -795,7 +804,7 @@ class GameFragment : Fragment() {
                         1 -> {
                             if (questionCount == firstLevelGeometryQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -810,7 +819,7 @@ class GameFragment : Fragment() {
                         2 -> {
                             if (questionCount == firstLevelPhysicsQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -825,7 +834,7 @@ class GameFragment : Fragment() {
                         3 -> {
                             if (questionCount == firstLevelGeographyQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -844,7 +853,7 @@ class GameFragment : Fragment() {
                         1 -> {
                             if (questionCount == secondLevelGeometryQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -859,7 +868,7 @@ class GameFragment : Fragment() {
                         2 -> {
                             if (questionCount == secondLevelPhysicsQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -874,7 +883,7 @@ class GameFragment : Fragment() {
                         3 -> {
                             if (questionCount == secondLevelGeographyQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -900,7 +909,7 @@ class GameFragment : Fragment() {
                         1 -> {
                             if (questionCount == firstLevelGeometryQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -915,7 +924,7 @@ class GameFragment : Fragment() {
                         2 -> {
                             if (questionCount == firstLevelPhysicsQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -930,7 +939,7 @@ class GameFragment : Fragment() {
                         3 -> {
                             if (questionCount == firstLevelGeographyQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -949,7 +958,7 @@ class GameFragment : Fragment() {
                         1 -> {
                             if (questionCount == secondLevelGeometryQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -964,7 +973,7 @@ class GameFragment : Fragment() {
                         2 -> {
                             if (questionCount == secondLevelPhysicsQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -979,7 +988,7 @@ class GameFragment : Fragment() {
                         3 -> {
                             if (questionCount == secondLevelGeographyQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1005,7 +1014,7 @@ class GameFragment : Fragment() {
                         1 -> {
                             if (questionCount == firstLevelGeometryQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1020,7 +1029,7 @@ class GameFragment : Fragment() {
                         2 -> {
                             if (questionCount == firstLevelPhysicsQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1035,7 +1044,7 @@ class GameFragment : Fragment() {
                         3 -> {
                             if (questionCount == firstLevelGeographyQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1054,7 +1063,7 @@ class GameFragment : Fragment() {
                         1 -> {
                             if (questionCount == secondLevelGeometryQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1069,7 +1078,7 @@ class GameFragment : Fragment() {
                         2 -> {
                             if (questionCount == secondLevelPhysicsQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1084,7 +1093,7 @@ class GameFragment : Fragment() {
                         3 -> {
                             if (questionCount == secondLevelGeographyQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1110,7 +1119,7 @@ class GameFragment : Fragment() {
                         1 -> {
                             if (questionCount == firstLevelGeometryQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1125,7 +1134,7 @@ class GameFragment : Fragment() {
                         2 -> {
                             if (questionCount == firstLevelPhysicsQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1140,7 +1149,7 @@ class GameFragment : Fragment() {
                         3 -> {
                             if (questionCount == firstLevelGeographyQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1159,7 +1168,7 @@ class GameFragment : Fragment() {
                         1 -> {
                             if (questionCount == secondLevelGeometryQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1174,7 +1183,7 @@ class GameFragment : Fragment() {
                         2 -> {
                             if (questionCount == secondLevelPhysicsQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",
@@ -1189,7 +1198,7 @@ class GameFragment : Fragment() {
                         3 -> {
                             if (questionCount == secondLevelGeographyQuestions.size) {
                                 val intent = Intent(requireContext(), ResultActivity::class.java)
-                                intent.putExtra("level",playerLevel)
+                                intent.putExtra("level", playerLevel)
                                 intent.putExtra("menu", menuArgs.menu)
                                 intent.putIntegerArrayListExtra(
                                     "firstLevelAnswers",

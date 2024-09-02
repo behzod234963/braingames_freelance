@@ -20,6 +20,11 @@ class ResultActivity : AppCompatActivity() {
         initView()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
     @SuppressLint("SetTextI18n")
     private fun initView() {
         val menu = intent.getIntExtra("menu", 0)
